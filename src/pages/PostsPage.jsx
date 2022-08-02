@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { connect } from "react-redux";
-import { fetchPosts } from "../store/actions/postsActions";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts, postsSelector } from "../store/slices/posts";
 import Post from "../components/Post";
 
-function PostsPage({ dispatch, loading, posts, hasErrors }) {
+function PostsPage() {
+  const dispatch = useDispatch();
+  const { posts, loading, hasErrors } = useSelector(postsSelector);
+
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
@@ -23,10 +26,4 @@ function PostsPage({ dispatch, loading, posts, hasErrors }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  posts: state.posts.posts,
-  hasErrors: state.posts.hasErrors,
-});
-
-export default connect(mapStateToProps)(PostsPage);
+export default PostsPage;
