@@ -23,10 +23,12 @@ function PostsPage({ dispatch, loading, posts, hasErrors }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  posts: state.posts.posts,
-  hasErrors: state.posts.hasErrors,
-});
+function mapStateToProps(state) {
+  return {
+    loading: state.posts.loading,
+    posts: state.posts.posts,
+    hasErrors: state.posts.hasErrors,
+  };
+}
 
 export default connect(mapStateToProps)(PostsPage);
